@@ -1,0 +1,18 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="numericKeyboard">
+        <item name="fontFamily">sans-serif-light</item>
+        <item name="textColor">#37474f</item>
+        <item name="enabledTextColor">#4cb5ab</item>
+        <item name="textSize">32sp</item>
+        <item name="background">@drawable/sel_keyboard_symbol</item>
+    </style>
+</resources>
