@@ -63,10 +63,10 @@ class NumericKeyboard(context: Context, attrs: AttributeSet) : FrameLayout(conte
             backspace?.setImageResource(R.drawable.vec_backspace)
         } else backspace?.setImageDrawable(backspaceButtonBackground)
 
-        val fontFamily = typedArray.getString(R.styleable.NumericKeyboard_fontFamily)
-        val textColor = typedArray.getColor(R.styleable.NumericKeyboard_textColor, Color.BLACK)
-        val textSize = typedArray.getDimension(R.styleable.NumericKeyboard_textSize, 12F)
-        val background = typedArray.getDrawable(R.styleable.NumericKeyboard_background)
+        val fontFamily = typedArray.getString(R.styleable.NumericKeyboard_nk_button_fontFamily)
+        val textColor = typedArray.getColor(R.styleable.NumericKeyboard_nk_button_textColor, Color.BLACK)
+        val textSize = typedArray.getDimension(R.styleable.NumericKeyboard_nk_button_textSize, 12F)
+        val background = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
         for (button in numericButtons) {
             button?.setTextColor(textColor)
             button?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
@@ -75,7 +75,7 @@ class NumericKeyboard(context: Context, attrs: AttributeSet) : FrameLayout(conte
         }
         backspace?.setBackgroundDrawable(background)
         done?.setBackgroundDrawable(background)
-        enabledUnlimitedColor = typedArray.getColor(R.styleable.NumericKeyboard_enabledTextColor, Color.GREEN)
+        enabledUnlimitedColor = typedArray.getColor(R.styleable.NumericKeyboard_nk_button_enabledTextColor, Color.GREEN)
         disabledUnlimitedColor = textColor
         typedArray.recycle()
     }
