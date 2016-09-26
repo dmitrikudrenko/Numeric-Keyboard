@@ -10,6 +10,7 @@ Beautiful keyboard for sales applications
 Download
 --------
 [ ![Download](https://api.bintray.com/packages/dmitrikudrenko/maven/Numeric-Keyboard/images/download.svg) ](https://bintray.com/dmitrikudrenko/maven/Numeric-Keyboard/_latestVersion)
+[![Build Status](https://travis-ci.org/dmitrikudrenko/Numeric-Keyboard.svg?branch=master)](https://travis-ci.org/dmitrikudrenko/Numeric-Keyboard)
 
 Maven
 ```xml
