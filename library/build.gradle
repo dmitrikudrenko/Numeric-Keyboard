@@ -1,5 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    groupId = 'io.github.dmitrikudrenko'
+    artifactId = 'numeric-keyboard'
+    publishVersion = libraryVersionName
+    desc = 'Beautiful keyboard for sales applications.'
+    licences = ['Apache-2.0']
+    uploadName = 'Numeric-Keyboard'
+    website = 'https://github.com/dmitrikudrenko/Numeric-Keyboard'
+}
 
 android {
     compileSdkVersion androidCompileSdkVersion
