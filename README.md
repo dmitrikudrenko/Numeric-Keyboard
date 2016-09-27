@@ -27,6 +27,25 @@ Gradle
 compile 'io.github.dmitrikudrenko:numeric-keyboard:$latestVersion'
 ```
 
+Customize
+=========
+```xml
+<!-- button's symbol font -->
+<item name="nk_button_fontFamily">sans-serif-light</item>
+<!-- button's symbol color -->
+<item name="nk_button_textColor">#37474f</item>
+<!-- unlimited pressed button color -->
+<item name="nk_button_enabledTextColor">#4cb5ab</item>
+<!-- button's symbol text size -->
+<item name="nk_button_textSize">32sp</item>
+<!-- button background (state list) -->
+<item name="nk_button_background">@drawable/sel_keyboard_symbol</item>
+<!-- done button resource -->
+<item name="nk_button_done_src"></item>
+<!-- backspace button resource -->
+<item name="nk_button_backspace_src"></item>
+```
+
 License
 =======
 
