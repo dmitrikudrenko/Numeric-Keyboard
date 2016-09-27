@@ -6,8 +6,8 @@ project.ext {
     androidMinSdkVersion = 14
     androidTargetSdkVersion = 23
 
-    libraryVersionCode = 1
-    libraryVersionName = "1.0.0"
+    libraryVersionCode = 2
+    libraryVersionName = "1.0.1"
 
     androidSupportLibraryVersion = '23.4.0'
 }

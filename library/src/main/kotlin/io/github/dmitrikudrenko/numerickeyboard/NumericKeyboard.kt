@@ -53,28 +53,30 @@ class NumericKeyboard(context: Context, attrs: AttributeSet) : FrameLayout(conte
 
     private fun setStyle(context: Context, attrs: AttributeSet) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.NumericKeyboard)
-        val doneButtonBackground = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_done_src)
-        if (doneButtonBackground == null) {
+        val doneButtonSrc = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_done_src)
+        if (doneButtonSrc == null) {
             done?.setImageResource(R.drawable.sel_button_ok)
-        } else done?.setImageDrawable(doneButtonBackground)
+        } else done?.setImageDrawable(doneButtonSrc)
 
-        val backspaceButtonBackground = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_backspace_src)
-        if (backspaceButtonBackground == null) {
+        val backspaceButtonSrc = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_backspace_src)
+        if (backspaceButtonSrc == null) {
             backspace?.setImageResource(R.drawable.vec_backspace)
-        } else backspace?.setImageDrawable(backspaceButtonBackground)
+        } else backspace?.setImageDrawable(backspaceButtonSrc)
 
         val fontFamily = typedArray.getString(R.styleable.NumericKeyboard_nk_button_fontFamily)
         val textColor = typedArray.getColor(R.styleable.NumericKeyboard_nk_button_textColor, Color.BLACK)
         val textSize = typedArray.getDimension(R.styleable.NumericKeyboard_nk_button_textSize, 12F)
-        val background = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
         for (button in numericButtons) {
+            val background = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
             button?.setTextColor(textColor)
             button?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
             button?.setBackgroundDrawable(background)
             button?.typeface = Typeface.create(fontFamily, Typeface.NORMAL)
         }
-        backspace?.setBackgroundDrawable(background)
-        done?.setBackgroundDrawable(background)
+        val doneBackground = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
+        done?.setBackgroundDrawable(doneBackground)
+        val backspaceBackground = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
+        backspace?.setBackgroundDrawable(backspaceBackground)
         enabledUnlimitedColor = typedArray.getColor(R.styleable.NumericKeyboard_nk_button_enabledTextColor, Color.GREEN)
         disabledUnlimitedColor = textColor
         typedArray.recycle()
