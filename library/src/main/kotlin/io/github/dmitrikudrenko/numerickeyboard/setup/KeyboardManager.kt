@@ -17,7 +17,7 @@ import io.github.dmitrikudrenko.numerickeyboard.R
 import io.github.dmitrikudrenko.numerickeyboard.editor.NumericEditText
 import java.util.concurrent.CopyOnWriteArrayList
 
-class KeyboardSetup(private val content: ViewGroup, private val space: View, private val keyboard: NumericKeyboard) : IKeyboardSetup {
+class KeyboardManager(private val content: ViewGroup, private val space: View, private val keyboard: NumericKeyboard) : IKeyboardManager {
 
     private val inputMethodManager: InputMethodManager
     private val handler = Handler()
@@ -26,8 +26,10 @@ class KeyboardSetup(private val content: ViewGroup, private val space: View, pri
 
     private var state: State? = null
 
-    private val mClosedCallbacks = CopyOnWriteArrayList<IKeyboardSetup.Callback>()
-    private val mOpenedCallbacks = CopyOnWriteArrayList<IKeyboardSetup.Callback>()
+    private var focusedEditText: EditText? = null
+
+    private val mClosedCallbacks = CopyOnWriteArrayList<IKeyboardManager.Callback>()
+    private val mOpenedCallbacks = CopyOnWriteArrayList<IKeyboardManager.Callback>()
 
     private enum class State {
         OPENED, OPENING, CLOSED, CLOSING
@@ -40,7 +42,7 @@ class KeyboardSetup(private val content: ViewGroup, private val space: View, pri
         state = State.CLOSED
     }
 
-    private fun closeKeyboard(callback: IKeyboardSetup.Callback?) {
+    private fun closeKeyboard(callback: IKeyboardManager.Callback?) {
         registerClosedCallback(callback)
         if (state == State.OPENED || state == State.OPENING) {
             space.visibility = View.GONE
@@ -51,11 +53,11 @@ class KeyboardSetup(private val content: ViewGroup, private val space: View, pri
         } else if (state == State.CLOSED) dispatchClosedEvent()
     }
 
-    private fun openKeyboard(callback: IKeyboardSetup.Callback?) {
+    private fun openKeyboard(callback: IKeyboardManager.Callback?) {
         registerOpenedCallback(callback)
         if (state == State.CLOSED || state == State.CLOSING) {
             val wasSoftKeyboardOpened = inputMethodManager.hideSoftInputFromWindow(content.windowToken, 0, object : ResultReceiver(handler) {
-                override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
+                override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
                     openKeyboardInternal()
                 }
             })
@@ -141,7 +143,8 @@ class KeyboardSetup(private val content: ViewGroup, private val space: View, pri
                 }
                 editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
                     if (hasFocus) {
-                        closeKeyboard(object : IKeyboardSetup.Callback {
+                        focusedEditText = editText
+                        closeKeyboard(object : IKeyboardManager.Callback {
                             override fun onCompleted() {
                                 editText.inputType = inputType
                                 inputMethodManager.showSoftInput(editText, 0)
@@ -159,6 +162,7 @@ class KeyboardSetup(private val content: ViewGroup, private val space: View, pri
             for (view in views) {
                 view.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
                     if (hasFocus) {
+                        focusedEditText = view
                         keyboard.setNumericEditor(view)
                         openKeyboard(null)
                     } else
@@ -168,21 +172,29 @@ class KeyboardSetup(private val content: ViewGroup, private val space: View, pri
         }
     }
 
-    private fun registerOpenedCallback(callback: IKeyboardSetup.Callback?) {
+    override fun onBackPressed(): Boolean {
+        if (state == State.OPENED || state == State.OPENING) {
+            focusedEditText?.clearFocus()
+            return true
+        }
+        return false
+    }
+
+    private fun registerOpenedCallback(callback: IKeyboardManager.Callback?) {
         if (callback != null)
             mOpenedCallbacks.add(callback)
     }
 
-    private fun registerClosedCallback(callback: IKeyboardSetup.Callback?) {
+    private fun registerClosedCallback(callback: IKeyboardManager.Callback?) {
         if (callback != null)
             mClosedCallbacks.add(callback)
     }
 
-    private fun unregisterOpenedCallback(callback: IKeyboardSetup.Callback) {
+    private fun unregisterOpenedCallback(callback: IKeyboardManager.Callback) {
         mOpenedCallbacks.remove(callback)
     }
 
-    private fun unregisterClosedCallback(callback: IKeyboardSetup.Callback) {
+    private fun unregisterClosedCallback(callback: IKeyboardManager.Callback) {
         mClosedCallbacks.remove(callback)
     }
 

@@ -3,6 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:id="@+id/focus_thief"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
     <ScrollView
         android:id="@+id/content"
         android:layout_width="match_parent"
@@ -17,15 +24,56 @@
             android:padding="16dp">
 
             <EditText
-                android:id="@+id/simple_edit_text"
+                android:id="@+id/simple_edit_text_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Simple edittext" />
+
+            <EditText
+                android:id="@+id/simple_edit_text_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Simple edittext" />
+
+            <EditText
+                android:id="@+id/simple_edit_text_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Simple edittext" />
+
+            <EditText
+                android:id="@+id/simple_edit_text_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Simple edittext" />
 
             <io.github.dmitrikudrenko.numerickeyboard.editor.NumericEditText
-                android:id="@+id/numeric_edit_text"
+                android:id="@+id/numeric_edit_text_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <io.github.dmitrikudrenko.numerickeyboard.editor.NumericEditText
+                android:id="@+id/numeric_edit_text_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <io.github.dmitrikudrenko.numerickeyboard.editor.NumericEditText
+                android:id="@+id/numeric_edit_text_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <io.github.dmitrikudrenko.numerickeyboard.editor.NumericEditText
+                android:id="@+id/numeric_edit_text_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
         </LinearLayout>
     </ScrollView>
 
