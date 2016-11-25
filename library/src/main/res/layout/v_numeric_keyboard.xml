@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/line_1"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/keyboardRowHeight"
+        android:layout_y="@dimen/firstRowPosition"
         android:orientation="horizontal">
 
         <Button
@@ -41,8 +42,9 @@
     <LinearLayout
         android:id="@+id/line_2"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/keyboardRowHeight"
         android:layout_below="@+id/line_1"
+        android:layout_y="@dimen/secondRowPosition"
         android:orientation="horizontal">
 
         <Button
@@ -75,8 +77,9 @@
     <LinearLayout
         android:id="@+id/line_3"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/keyboardRowHeight"
         android:layout_below="@+id/line_2"
+        android:layout_y="@dimen/thirdRowPosition"
         android:orientation="horizontal">
 
         <Button
@@ -109,8 +112,9 @@
     <LinearLayout
         android:id="@+id/line_4"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/keyboardRowHeight"
         android:layout_below="@+id/line_3"
+        android:layout_y="@dimen/fourthRowPosition"
         android:orientation="horizontal">
 
         <Button
@@ -143,4 +147,4 @@
             android:textAllCaps="false"
             android:textSize="16sp" />
     </LinearLayout>
-</RelativeLayout>
+</AbsoluteLayout>

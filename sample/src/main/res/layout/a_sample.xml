@@ -3,17 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <io.github.dmitrikudrenko.numerickeyboard.editor.NumericEditText
-        android:id="@+id/edit_text"
+    <ScrollView
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/space"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/simple_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Simple edittext" />
+
+            <io.github.dmitrikudrenko.numerickeyboard.editor.NumericEditText
+                android:id="@+id/numeric_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/space"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/keyboardHeight"
+        android:layout_alignParentBottom="true"
+        android:background="#000"
+        android:visibility="gone" />
 
     <io.github.dmitrikudrenko.numerickeyboard.NumericKeyboard
         android:id="@+id/keyboard"
         style="@style/numericKeyboard"
-        android:background="#eceff0"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" />
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:background="#eceff0" />
 </RelativeLayout>

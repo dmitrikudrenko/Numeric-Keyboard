@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="keyboardRowHeight">56dp</dimen>
+    <dimen name="keyboardHeight">224dp</dimen>
+    <integer name="keyboardAnimationDuration">200</integer>
+
+    <dimen name="firstRowPosition">0dp</dimen>
+    <dimen name="secondRowPosition">56dp</dimen>
+    <dimen name="thirdRowPosition">112dp</dimen>
+    <dimen name="fourthRowPosition">168dp</dimen>
+</resources>
