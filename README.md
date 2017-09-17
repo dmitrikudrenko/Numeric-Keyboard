@@ -4,8 +4,8 @@ Numeric keyboard
 Beautiful keyboard for sales applications
 
 ##Screenshots
-![Image](https://raw.githubusercontent.com/dmitrikudrenko/Numeric-Keyboard/master/media/screenshot_1.png)
-![Image](https://raw.githubusercontent.com/dmitrikudrenko/Numeric-Keyboard/master/media/screenshot_2.png)
+<img src="https://raw.githubusercontent.com/dmitrikudrenko/Numeric-Keyboard/master/media/screenshot_1.png" alt="screenshot 1" width="320">
+<img src="https://raw.githubusercontent.com/dmitrikudrenko/Numeric-Keyboard/master/media/screenshot_2.png" alt="screenshot 1" width="320">
 
 Download
 --------
