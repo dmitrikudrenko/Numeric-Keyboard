@@ -4,6 +4,7 @@ package io.github.dmitrikudrenko.numerickeyboard.setup
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.ResultReceiver
 import android.text.InputType
 import android.view.View
@@ -19,10 +20,13 @@ import java.util.concurrent.CopyOnWriteArrayList
 
 class KeyboardManager(private val content: ViewGroup, private val space: View, private val keyboard: NumericKeyboard) : IKeyboardManager {
 
-    private val inputMethodManager: InputMethodManager
-    private val handler = Handler()
-    private val keyboardHeight: Float
-    private val keyboardAnimationDuration: Int
+    private val inputMethodManager: InputMethodManager =
+            content.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    private val keyboardHeight: Float =
+            content.context.resources.getDimension(R.dimen.keyboardHeight)
+    private val keyboardAnimationDuration: Int =
+            content.context.resources.getInteger(R.integer.keyboardAnimationDuration)
+    private val handler = Handler(Looper.getMainLooper())
 
     private var state: State? = null
 
@@ -36,9 +40,6 @@ class KeyboardManager(private val content: ViewGroup, private val space: View, p
     }
 
     init {
-        this.inputMethodManager = content.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        this.keyboardHeight = content.context.resources.getDimension(R.dimen.keyboardHeight)
-        this.keyboardAnimationDuration = content.context.resources.getInteger(R.integer.keyboardAnimationDuration)
         state = State.CLOSED
     }
 
@@ -130,10 +131,10 @@ class KeyboardManager(private val content: ViewGroup, private val space: View, p
     }
 
     override fun setupSimpleEditTextViews(vararg views: EditText) {
-        if (views.size > 0) {
+        if (views.isNotEmpty()) {
             for (editText in views) {
                 val inputType = editText.inputType
-                editText.setOnTouchListener { v, event ->
+                editText.setOnTouchListener { _, event ->
                     editText.inputType = InputType.TYPE_NULL
                     editText.onTouchEvent(event)
                     editText.inputType = inputType
@@ -141,7 +142,7 @@ class KeyboardManager(private val content: ViewGroup, private val space: View, p
 
                     true
                 }
-                editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                     if (hasFocus) {
                         focusedEditText = editText
                         closeKeyboard(object : IKeyboardManager.Callback {
@@ -158,9 +159,9 @@ class KeyboardManager(private val content: ViewGroup, private val space: View, p
     }
 
     override fun setupNumericEditTextViews(vararg views: NumericEditText) {
-        if (views.size > 0) {
+        if (views.isNotEmpty()) {
             for (view in views) {
-                view.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                view.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                     if (hasFocus) {
                         focusedEditText = view
                         keyboard.setNumericEditor(view)

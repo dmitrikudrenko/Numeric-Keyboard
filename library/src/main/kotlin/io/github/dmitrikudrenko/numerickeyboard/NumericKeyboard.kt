@@ -7,6 +7,7 @@ import android.os.Vibrator
 import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
@@ -53,30 +54,40 @@ class NumericKeyboard(context: Context, attrs: AttributeSet) : FrameLayout(conte
 
     private fun setStyle(context: Context, attrs: AttributeSet) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.NumericKeyboard)
-        val doneButtonSrc = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_done_src)
-        if (doneButtonSrc == null) {
-            done?.setImageResource(R.drawable.sel_button_ok)
-        } else done?.setImageDrawable(doneButtonSrc)
+        done?.let {
+            val doneButtonSrc = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_done_src)
+            if (doneButtonSrc == null) {
+                it.setImageResource(R.drawable.sel_button_ok)
+            } else it.setImageDrawable(doneButtonSrc)
+            val doneBackground = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
+            it.setBackgroundDrawable(doneBackground)
+        }
 
-        val backspaceButtonSrc = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_backspace_src)
-        if (backspaceButtonSrc == null) {
-            backspace?.setImageResource(R.drawable.vec_backspace)
-        } else backspace?.setImageDrawable(backspaceButtonSrc)
+        backspace?.let {
+            val backspaceButtonSrc = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_backspace_src)
+            if (backspaceButtonSrc == null) {
+                it.setImageResource(R.drawable.vec_backspace)
+                val topPadding: Int = it.resources.getDimension(R.dimen.backspaceTopPadding).toInt()
+                it.setPadding(0, topPadding, 0, 0)
+            } else it.setImageDrawable(backspaceButtonSrc)
+            val backspaceBackground = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
+            it.setBackgroundDrawable(backspaceBackground)
+        }
 
         val fontFamily = typedArray.getString(R.styleable.NumericKeyboard_nk_button_fontFamily)
         val textColor = typedArray.getColor(R.styleable.NumericKeyboard_nk_button_textColor, Color.BLACK)
         val textSize = typedArray.getDimension(R.styleable.NumericKeyboard_nk_button_textSize, 12F)
         for (button in numericButtons) {
-            val background = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
-            button?.setTextColor(textColor)
-            button?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
-            button?.setBackgroundDrawable(background)
-            button?.typeface = Typeface.create(fontFamily, Typeface.NORMAL)
+            button?.let {
+                val background = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
+                it.setTextColor(textColor)
+                it.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
+                it.setBackgroundDrawable(background)
+                it.typeface = Typeface.create(fontFamily, Typeface.NORMAL)
+                it.gravity = Gravity.CENTER
+            }
         }
-        val doneBackground = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
-        done?.setBackgroundDrawable(doneBackground)
-        val backspaceBackground = typedArray.getDrawable(R.styleable.NumericKeyboard_nk_button_background)
-        backspace?.setBackgroundDrawable(backspaceBackground)
+
         enabledUnlimitedColor = typedArray.getColor(R.styleable.NumericKeyboard_nk_button_enabledTextColor, Color.GREEN)
         disabledUnlimitedColor = textColor
         typedArray.recycle()
@@ -155,7 +166,7 @@ class NumericKeyboard(context: Context, attrs: AttributeSet) : FrameLayout(conte
     }
 
     private fun setMode(mode: Mode) {
-        when(mode) {
+        when (mode) {
             Mode.LIMITED -> unlimited?.visibility = View.INVISIBLE
             Mode.UNLIMITED -> unlimited?.visibility = View.VISIBLE
         }

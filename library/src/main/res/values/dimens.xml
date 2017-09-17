@@ -8,4 +8,6 @@
     <dimen name="secondRowPosition">56dp</dimen>
     <dimen name="thirdRowPosition">112dp</dimen>
     <dimen name="fourthRowPosition">168dp</dimen>
+
+    <dimen name="backspaceTopPadding">8dp</dimen>
 </resources>
